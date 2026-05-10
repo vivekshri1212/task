@@ -21,6 +21,7 @@ const FRONTEND_URLS = (process.env.FRONTEND_URLS || "")
   .split(",")
   .map((value) => value.trim())
   .filter(Boolean);
+const DEBUG_REQUESTS = process.env.DEBUG_REQUESTS !== "false";
 const { users, projects, tasks } = await connectToDatabase();
 
 const allowedOrigins = new Set([
@@ -38,11 +39,22 @@ app.use(
         return;
       }
 
+      console.error("[cors] blocked origin", origin);
       callback(new Error(`CORS blocked for origin: ${origin}`));
     }
   })
 );
 app.use(express.json());
+app.use((req, _res, next) => {
+  if (DEBUG_REQUESTS) {
+    console.log(`[request] ${req.method} ${req.path}`, {
+      origin: req.headers.origin || "direct",
+      host: req.headers.host
+    });
+  }
+
+  next();
+});
 
 const TASK_STATUS_ORDER = {
   todo: 1,
@@ -623,5 +635,11 @@ app.use((err, _req, res, _next) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`API running on ${BASE_URL}`);
+  console.log("API running", {
+    BASE_URL,
+    FRONTEND_URL,
+    FRONTEND_URLS,
+    PORT,
+    allowedOrigins: [...allowedOrigins]
+  });
 });
