@@ -39,7 +39,7 @@ export const taskSchema = z.object({
   status: z.enum(["todo", "in_progress", "review", "done"]),
   priority: z.enum(["low", "medium", "high"]),
   dueDate: dateField,
-  assignedTo: z.coerce.number().int().positive().optional().nullable()
+  assignedTo: z.string().trim().min(1).optional().nullable()
 });
 
 export const profileSchema = z.object({

@@ -372,7 +372,7 @@ function Workspace({ token, user, onLogout, onSessionRefresh }) {
     resetFeedback();
 
     try {
-      await api.addMember(token, selectedProjectId, Number(memberUserId));
+      await api.addMember(token, selectedProjectId, memberUserId);
       setMemberUserId("");
       setSuccess("Project member added successfully.");
       await loadProjectDetails(selectedProjectId);
@@ -394,7 +394,7 @@ function Workspace({ token, user, onLogout, onSessionRefresh }) {
         status: taskDraft.status,
         priority: taskDraft.priority,
         dueDate: taskDraft.dueDate || null,
-        assignedTo: taskDraft.assignedTo ? Number(taskDraft.assignedTo) : null
+        assignedTo: taskDraft.assignedTo || null
       });
 
       setTaskDraft(TASK_TEMPLATE);
@@ -859,7 +859,7 @@ function ProjectsView({
                 value={memberUserId}
                 onChange={onMemberUserIdChange}
                 options={users.filter((member) => member.role === "member").map((member) => member.id)}
-                renderLabel={(value) => users.find((member) => member.id === Number(value))?.name || "Select member"}
+                renderLabel={(value) => users.find((member) => member.id === value)?.name || "Select member"}
                 includeBlank
               />
               <button className="primary-button" type="submit" disabled={!selectedProjectId || !memberUserId}>
@@ -1060,7 +1060,7 @@ function TaskModal({ open, selectedProject, projectMembers, taskDraft, onClose, 
               value={taskDraft.assignedTo}
               onChange={(value) => onChange((current) => ({ ...current, assignedTo: value }))}
               options={projectMembers.map((member) => member.id)}
-              renderLabel={(value) => projectMembers.find((member) => member.id === Number(value))?.name || "Select member"}
+              renderLabel={(value) => projectMembers.find((member) => member.id === value)?.name || "Select member"}
               includeBlank
             />
           </div>

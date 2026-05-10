@@ -4,16 +4,16 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "dev": "node --env-file=.env --watch src/server.js",
+    "dev": "node --env-file=.env --watch server.js",
     "build": "node -e \"console.log('server build step not required')\"",
-    "start": "node src/server.js"
+    "start": "node server.js"
   },
   "dependencies": {
     "bcryptjs": "^3.0.2",
-    "better-sqlite3": "^11.10.0",
     "cors": "^2.8.5",
-    "express": "^5.1.0",
+    "express": "^5.2.1",
     "jsonwebtoken": "^9.0.2",
+    "mongodb": "^7.2.0",
     "zod": "^3.24.4"
   }
 }
