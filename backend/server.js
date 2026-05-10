@@ -16,9 +16,32 @@ import {
 const app = express();
 const PORT = process.env.PORT || 4000;
 const BASE_URL = process.env.BASE_URL || `http://localhost:${PORT}`;
+const FRONTEND_URL = process.env.FRONTEND_URL || "http://localhost:5173";
+const FRONTEND_URLS = (process.env.FRONTEND_URLS || "")
+  .split(",")
+  .map((value) => value.trim())
+  .filter(Boolean);
 const { users, projects, tasks } = await connectToDatabase();
 
-app.use(cors());
+const allowedOrigins = new Set([
+  FRONTEND_URL,
+  ...FRONTEND_URLS,
+  "http://localhost:5173",
+  "http://127.0.0.1:5173"
+]);
+
+app.use(
+  cors({
+    origin(origin, callback) {
+      if (!origin || allowedOrigins.has(origin)) {
+        callback(null, true);
+        return;
+      }
+
+      callback(new Error(`CORS blocked for origin: ${origin}`));
+    }
+  })
+);
 app.use(express.json());
 
 const TASK_STATUS_ORDER = {
