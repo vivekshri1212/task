@@ -4,3 +4,5 @@ client/dist/
 frontend/dist/
 backend/data/*.db
 backend/data/*.db-*
+frontend/.env
+backend/.env

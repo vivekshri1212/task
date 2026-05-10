@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "dev": "node --watch src/server.js",
+    "dev": "node --env-file=.env --watch src/server.js",
     "build": "node -e \"console.log('server build step not required')\"",
     "start": "node src/server.js"
   },

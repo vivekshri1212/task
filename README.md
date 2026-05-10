@@ -39,6 +39,69 @@ npm.cmd run dev:frontend
 
 Frontend runs on `http://localhost:5173` and backend runs on `http://localhost:4000`.
 
+## Environment Files
+
+Backend `.env`
+
+```env
+PORT=4000
+JWT_SECRET=task_manager_assessment_secret
+```
+
+Frontend `.env`
+
+```env
+VITE_API_URL=http://localhost:4000/api
+```
+
+### Render Deployment Env
+
+Backend service env:
+
+```env
+PORT=10000
+JWT_SECRET=task_manager_super_secret_2026
+```
+
+Frontend service env:
+
+```env
+VITE_API_URL=https://your-backend-name.onrender.com/api
+```
+
+## Railway Deployment
+
+Create two services from the same repository.
+
+### Frontend Service
+
+- Root Directory: `/frontend`
+- Build Command: `npm install && npm run build`
+- Start Command: `npm run start`
+
+Frontend variable:
+
+```env
+VITE_API_URL=https://your-backend-service.up.railway.app/api
+```
+
+### Backend Service
+
+- Root Directory: `/backend`
+- Build Command: `npm install`
+- Start Command: `npm run start`
+
+Backend variable:
+
+```env
+JWT_SECRET=task_manager_super_secret_2026
+```
+
+Notes:
+
+- Railway provides `PORT` automatically, so you do not need to set it manually.
+- Update the frontend `VITE_API_URL` after your backend gets its Railway public domain.
+
 ## Assessment Highlights
 
 - Secure login and registration flow with JWT-based authentication

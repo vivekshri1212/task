@@ -173,33 +173,13 @@ function AuthPage({ onAuthSuccess }) {
   }
 
   return (
-    <div className="auth-page">
-      <div className="auth-visual">
-        <div className="auth-visual-card">
-          <p className="eyebrow">Ethara Assessment Build</p>
-          <h1>Task Manager</h1>
-          <p>
-            A polished full-stack workspace with authentication, dashboards, project tracking, task workflows,
-            validations, and role-based access control.
-          </p>
-          <div className="auth-metric-row">
-            <MiniMetric label="Frontend" value="10/10" />
-            <MiniMetric label="Backend" value="10/10" />
-            <MiniMetric label="Visual" value="10/10" />
-          </div>
-          <div className="auth-demo-box">
-            <strong>Demo Accounts</strong>
-            <span>Admin: admin@ethara.ai / Admin@123</span>
-            <span>Member: member@ethara.ai / Member@123</span>
-          </div>
-        </div>
-      </div>
-
-      <div className="auth-panel">
-        <div className="auth-card">
+    <div className="auth-page simple">
+      <div className="auth-panel single">
+        <div className="auth-card compact">
           <div className="auth-card-head">
-            <h2>Welcome Back</h2>
-            <p>Login to your account</p>
+            <p className="eyebrow dark">Task Manager</p>
+            <h2>{mode === "login" ? "Login" : "Sign Up"}</h2>
+            <p>{mode === "login" ? "Access your workspace" : "Create your account to continue"}</p>
           </div>
 
           <div className="segment">
@@ -207,7 +187,7 @@ function AuthPage({ onAuthSuccess }) {
               Login
             </button>
             <button className={mode === "register" ? "active" : ""} onClick={() => setMode("register")} type="button">
-              Register
+              Sign Up
             </button>
           </div>
 
@@ -1116,15 +1096,6 @@ function SummaryCard({ label, value, delta }) {
       <strong>{value}</strong>
       <small>{delta}</small>
     </article>
-  );
-}
-
-function MiniMetric({ label, value }) {
-  return (
-    <div className="mini-metric">
-      <span>{label}</span>
-      <strong>{value}</strong>
-    </div>
   );
 }
 

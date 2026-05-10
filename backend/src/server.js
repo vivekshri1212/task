@@ -122,6 +122,21 @@ app.post("/api/auth/register", (req, res) => {
   `).run(data.name, data.email, bcrypt.hashSync(data.password, 10));
 
   const user = db.prepare("SELECT * FROM users WHERE id = ?").get(result.lastInsertRowid);
+
+  const projectResult = db.prepare(`
+    INSERT INTO projects (name, description, status, priority, due_date, owner_id, updated_at)
+    VALUES (?, ?, 'active', 'medium', NULL, ?, CURRENT_TIMESTAMP)
+  `).run(
+    `${data.name.split(" ")[0]}'s Workspace`,
+    "A starter workspace created automatically so new users can begin adding tasks right away.",
+    user.id
+  );
+
+  db.prepare("INSERT INTO project_members (project_id, user_id) VALUES (?, ?)").run(
+    projectResult.lastInsertRowid,
+    user.id
+  );
+
   res.status(201).json({ token: signToken(user), user: formatUser(user) });
 });
 
