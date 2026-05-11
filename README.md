@@ -2,6 +2,12 @@
 
 A full-stack task manager built for assessment submission, with authentication, role-based access control, dashboard insights, project management, task workflows, and a polished responsive UI.
 
+## Live Links
+
+- Frontend: [https://vivek-task.netlify.app](https://vivek-task.netlify.app)
+- Backend: [https://task-production-cf69.up.railway.app](https://task-production-cf69.up.railway.app)
+- Health Check: [https://task-production-cf69.up.railway.app/api/health](https://task-production-cf69.up.railway.app/api/health)
+
 ## Repository Name
 
 Recommended GitHub repository name: `task-manager-assessment-app`
@@ -37,21 +43,25 @@ npm.cmd run dev:backend
 npm.cmd run dev:frontend
 ```
 
-Frontend runs on `http://localhost:5173` and backend runs on `http://localhost:4000`.
+Live frontend: [https://vivek-task.netlify.app](https://vivek-task.netlify.app)
+
+Live backend: [https://task-production-cf69.up.railway.app](https://task-production-cf69.up.railway.app)
 
 ## Environment Files
 
 Backend `.env`
 
 ```env
-PORT=4000
+PORT=3000
 JWT_SECRET=task_manager_assessment_secret
+BASE_URL=https://task-production-cf69.up.railway.app
+FRONTEND_URL=https://vivek-task.netlify.app
 ```
 
 Frontend `.env`
 
 ```env
-VITE_API_URL=http://localhost:4000/api
+VITE_BASE_URL=https://task-production-cf69.up.railway.app
 ```
 
 ### Render Deployment Env
@@ -59,14 +69,16 @@ VITE_API_URL=http://localhost:4000/api
 Backend service env:
 
 ```env
-PORT=10000
+PORT=3000
 JWT_SECRET=task_manager_super_secret_2026
+BASE_URL=https://task-production-cf69.up.railway.app
+FRONTEND_URL=https://vivek-task.netlify.app
 ```
 
 Frontend service env:
 
 ```env
-VITE_API_URL=https://your-backend-name.onrender.com/api
+VITE_BASE_URL=https://task-production-cf69.up.railway.app
 ```
 
 ## Railway Deployment
@@ -82,7 +94,7 @@ Create two services from the same repository.
 Frontend variable:
 
 ```env
-VITE_API_URL=https://your-backend-service.up.railway.app/api
+VITE_BASE_URL=https://task-production-cf69.up.railway.app
 ```
 
 ### Backend Service
@@ -100,7 +112,7 @@ JWT_SECRET=task_manager_super_secret_2026
 Notes:
 
 - Railway provides `PORT` automatically, so you do not need to set it manually.
-- Update the frontend `VITE_API_URL` after your backend gets its Railway public domain.
+- Update the frontend `VITE_BASE_URL` after your backend gets its Railway public domain.
 
 ## Assessment Highlights
 
